@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AdvikEnterprises.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AdvikEnterprises.Controllers
 {
-    //[Authorize]
+    [JwtFilterFactory]
     [ApiController]
     [Route("[controller]")]
     //[AutoValidateAntiforgeryToken]
@@ -41,6 +42,7 @@ namespace AdvikEnterprises.Controllers
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
+        [JwtFilterFactory(Roles = "User")]
         public WeatherForecast GetUserData()
         {
             return new WeatherForecast() {
@@ -51,6 +53,7 @@ namespace AdvikEnterprises.Controllers
         }
 
         [HttpGet("[action]")]
+        [JwtFilterFactory(Roles = "User")]
         public IEnumerable<WeatherForecast> GetUser()
         {
             var rng = new Random();

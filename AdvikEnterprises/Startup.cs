@@ -64,6 +64,8 @@ namespace AdvikEnterprises
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<JwtFilter>();
+
             //options.Filters.Add(typeof(AddRandomNumberHeader2Filter));
             //services.AddScoped<AddRandomNumberHeader2Filter>();
             services.AddAntiforgery(x => x.HeaderName = "XSRF-TOKEN");

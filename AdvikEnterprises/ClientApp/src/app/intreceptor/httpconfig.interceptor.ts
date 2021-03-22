@@ -27,9 +27,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     req = req.clone({ headers: req.headers.set("Content-Type", "application/json") });
     var token = localStorage.getItem('jwttoken');
 
-    //if (token && req.url.indexOf("authenticate") == -1) {
-    //  req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
-    //}
+    if (token && req.url.indexOf("authenticate") == -1) {
+      req = req.clone({ headers: req.headers.set('CustomAuthorization', 'Bearer ' + token) });
+    }
 
     if (req.method == "POST" && xsrfToken != null) {
       req = req.clone({ headers: req.headers.set("XSRF-TOKEN", xsrfToken) });

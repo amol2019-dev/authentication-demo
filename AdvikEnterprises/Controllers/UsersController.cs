@@ -25,7 +25,7 @@ namespace AdvikEnterprises.Controllers
         {
             _userService = userService;
         }
-
+        
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost("authenticate")]
@@ -39,6 +39,7 @@ namespace AdvikEnterprises.Controllers
             return Ok(user);
         }
 
+        [JwtFilterFactory(Roles = "Admin")]
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public IActionResult GetAll()
@@ -47,6 +48,7 @@ namespace AdvikEnterprises.Controllers
             return Ok(users);
         }
 
+        [JwtFilterFactory]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
